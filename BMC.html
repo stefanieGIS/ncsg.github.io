@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+    <title>Baltimore OppMap Builder *ALPHA*</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js">
+</script>
+    <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js">
+</script>
+    <script type="text/javascript" src="lib/geoext/lib/GeoExt.js">
+</script>
+    <link rel="stylesheet" href="http://openlayers.org/api/theme/default/style.css" type="text/css">
+    <link rel="stylesheet" href="http://openlayers.org/dev/examples/style.css" type="text/css">
+    <script src="http://openlayers.org/api/OpenLayers.js" type="text/javascript">
+</script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCU-YQfWn1lrImPscGTnPaEtVihMC-R7h4&sensor=true">
+</script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-22870877-2']);
+            _gaq.push(['_setDomainName', 'knaaptime.com']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+    </script>
+    <script type="text/javascript" src="js/BMCtest_BMC_OppMap.js">
+</script>
+    <link rel="stylesheet" type="text/css" href="ext/resources/css/ext-all.css">
+</head>
+
+<body>
+    <div id="desc">
+        <h1>This application is currently in alpha stage; bugs, changes, and occasional downtimes should be expected<br></h1><br>
+
+        <p>*** Close this window by clicking the arrow in the top right corner***</p><br>
+
+        <p></p><br>
+
+        <p></p>
+
+        <ul>
+            <li>This application is being developed to support NCSG's Opportunity Mapping Effort. The goal of this project is to give both citizens and researchers better a better understanding of the ways that development patterns and housing choice affect life outcomes. 
+            <p></p><br>
+            </li>
+                        
+            <li>When complete, the application will allow visitors to construct dynamic indices of 'opportunity' by combining and weighting indicators of their choosing. As users consume data by building opportunity indices, they gain deeper insight into the ways that different neighborhood assets contribute to the health of the region. At the same time, they contribute data (in the form of analytics), telling researchers what matters to them by choosing which indicators are included and weighting their importance.
+                <p></p><br>
+            </li>
+              
+            <li>A clean UI and intuitive controls will be crucial if this application is ever going to catch on, but getting the functionality in place is my primary concern at the moment
+          
+           
+             <p></p><br>
+            </li>
+
+            
+            <li>The application currently only supports the display of opportunity indicators, and does not yet allow users to build custom indices. I am working on implementing these features through javascript libraries like jstat and geoscript
+
+                <p></p><br>
+            </li>
+            <br>
+            <hr>
+            <li>Layers of various Opportunity indicators are provided in the categories on the left. Additional overlays like transportation networks and subsidized housing units are provided as well 
+
+                <p></p><br>
+            </li>
+
+            <li>Tabs along the bottom of the page correspond to each of the categories on the left. Each tab includes a slider to adjust the transparency of the layers in each category 
+            
+                <p></p><br>
+            </li>
+
+            <li>contact me at knaaptime@gmail.com with any questions or if you'd like to contribute code!
+
+                <p></p><br>
+            </li>
+
+            <li>
+
+                <p></p><br>
+                <p><br>
+                <br>
+
+                <p></p>
+                <hr>
+                <hr>
+                <br>
+            </li>
+        </ul>
+    </div>
+
+    <div id="d1"></div>
+
+    <div id="d2"></div>
+</body>
+</html>
