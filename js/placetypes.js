@@ -2,8 +2,8 @@ OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
 OpenLayers.Util.onImageLoadErrorColor = "transparent"; 
 
 var urlArray = ["http://maps.knaaptime.com:8080/geoserver/wms", "http://test.knaaptime.com:8080/geoserver/wms"];
-var urlCloud ="http://54.80.98.94:8080/geoserver/wms";
-var aws = ["http://54.80.98.94:8080/geoserver/wms", "http://54.81.60.151:8080/geoserver/wms"];
+var urlCloud ="http://aws.knaaptime.com:8080/geoserver/wms";
+var aws = ["http://aws.knaaptime.com:8080/geoserver/wms", "http://aws.knaaptime.com:8080/geoserver/wms"];
 
 
 var placetypes = new OpenLayers.Layer.WMS("Placetypes", urlArray, {

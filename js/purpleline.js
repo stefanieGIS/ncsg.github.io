@@ -1,7 +1,7 @@
 
-var urlCloud = ["http://54.80.98.94:8080/geoserver/wms"];
+var urlCloud = ["http://aws.knaaptime.com:8080/geoserver/wms"];
 var urlHome = "http://maps.knaaptime.com:8080/geoserver/wms";
-var urlArray = ["http://54.80.98.94:8080/geoserver/wms", "http://54.81.60.151:8080/geoserver/wms", "http://maps.knaaptime.com:8080/geoserver/wms"];
+var urlArray = ["http://aws.knaaptime.com:8080/geoserver/wms", "http://aws.knaaptime.com:8080/geoserver/wms", "http://maps.knaaptime.com:8080/geoserver/wms"];
 
 var heatmaps = new OpenLayers.Layer.WMS("Heatmaps", urlCloud, {
 	layers: ["Employment Density", "Auto Collisions", "Low-wage residence", "Low-wage jobs", "Intersection"],
