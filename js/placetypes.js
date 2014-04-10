@@ -1,13 +1,22 @@
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
 OpenLayers.Util.onImageLoadErrorColor = "transparent"; 
 
+var urlCloud = ["http://aws.knaaptime.com:8080/geoserver/wms"];
 var urlArray = ["http://maps.knaaptime.com:8080/geoserver/wms", "http://test.knaaptime.com:8080/geoserver/wms"];
-var urlCloud ="http://aws.knaaptime.com:8080/geoserver/wms";
-var aws = ["http://aws.knaaptime.com:8080/geoserver/wms", "http://aws.knaaptime.com:8080/geoserver/wms"];
+var aws = ["http://aws.knaaptime.com:8080/geoserver/wms", "http://aws2.knaaptime.com:8080/geoserver/wms"];
 
-
-var placetypes = new OpenLayers.Layer.WMS("Placetypes", urlArray, {
-	layers: ["Metro Center", "Urban Center", "Town Center"],
+var network = new OpenLayers.Layer.WMS("Transportation", urlCloud, {
+	layers: ["WMATA routes", "WMATA stations", "MARC routes", "MARC stations","MD28_MD198"],
+	transparent: true,
+	'sphericalMercator': true,
+	format: "image/png"
+}, {
+	isBaseLayer: false,
+	buffer: 0,
+	visibility: false
+});
+var placetypes = new OpenLayers.Layer.WMS("Placetypes", urlCloud, {
+	layers: ["TCquintile","UCquintile", "TCthreshold","UCthreshold"],
 	transparent: true,
 	'sphericalMercator': true,
 	format: "image/png"
@@ -18,8 +27,17 @@ var placetypes = new OpenLayers.Layer.WMS("Placetypes", urlArray, {
 	visibility: false,
     singleTile: true, ratio: 1
 });
-
-var heatmaps = new OpenLayers.Layer.WMS("Heatmaps", aws, {
+var boundaries = new OpenLayers.Layer.WMS("Policy Boundaries", urlCloud, {
+	layers: ["PFAs", "MD county","STOA"],
+	transparent: true,
+	'sphericalMercator': true,
+	format: "image/png"
+}, {
+	isBaseLayer: false,
+	buffer: 0,
+	visibility: false
+});
+var heatmaps = new OpenLayers.Layer.WMS("Heatmaps", urlCloud, {
 	layers: ["Employment Density", "Auto Collisions", "Low-wage residence", "Low-wage jobs", "Intersection"],
 	transparent: true,
 	'sphericalMercator': true,
@@ -30,39 +48,8 @@ var heatmaps = new OpenLayers.Layer.WMS("Heatmaps", aws, {
 	visibility: false,
     singleTile: true, ratio: 1
 });
-var boundaries = new OpenLayers.Layer.WMS("Administrative Boundaries", urlArray, {
-	layers: ["County Boundary", "Priority Funding Areas"],
-	transparent: true,
-	'sphericalMercator': true,
-	format: "image/png"
-}, {
-	isBaseLayer: false,
-	buffer: 0,
-	visibility: false
-});
-var employment = new OpenLayers.Layer.WMS("Employment", aws, {
-	layers: ["NCSG Employment Centers", "Firms by Size", "Employment Density"],
-	transparent: true,
-	'sphericalMercator': true,
-	format: "image/png"
-}, {
-	isBaseLayer: false,
-	buffer: 0,
-	visibility: false,
-	singleTile: true, ratio: 1
-});
-var network = new OpenLayers.Layer.WMS("Transportation", aws, {
-	layers: ["Transit Stations", "MARC Line", "Bus Lines"],
-	transparent: true,
-	'sphericalMercator': true,
-	format: "image/png"
-}, {
-	isBaseLayer: false,
-	buffer: 0,
-	visibility: false
-});
-var landuse = new OpenLayers.Layer.WMS("Land Use", urlArray, {
-	layers: ["Generalized Zoning", "Parcels by Land Use"],
+var landuse = new OpenLayers.Layer.WMS("Land Use", urlCloud, {
+	layers: ["Generalized Zoning", "Parcels by Land Use","Green Corridor", "Green Hub"],
 	transparent: true,
 	'sphericalMercator': true,
 	format: "image/png"
@@ -97,7 +84,7 @@ Ext.onReady(function() {
 			isBaseLayer: true
 		}), new OpenLayers.Layer.OSM(null, null, {
 			isBaseLayer: true
-		}), landuse, employment, network, boundaries, heatmaps, placetypes],
+		}), landuse, heatmaps, boundaries, placetypes, network],
 		items: [{
 			xtype: "gx_zoomslider",
 			aggressive: true,
@@ -131,6 +118,14 @@ Ext.onReady(function() {
 		}
 	}, {
 		nodeType: "gx_layer",
+		layer: "Transportation",
+		isLeaf: false,
+		expanded: false,
+		loader: {
+			param: "LAYERS"
+		}
+	}, {
+		nodeType: "gx_layer",
 		layer: "Placetypes",
 		isLeaf: false,
 		expanded: true,
@@ -139,33 +134,17 @@ Ext.onReady(function() {
 		}
 	}, {
 		nodeType: "gx_layer",
+		layer: "Policy Boundaries",
+		isLeaf: false,
+		expanded: false,
+		loader: {
+			param: "LAYERS"
+		}
+	}, {
+		nodeType: "gx_layer",
 		layer: "Heatmaps",
 		isLeaf: false,
 		expanded: true,
-		loader: {
-			param: "LAYERS"
-		}
-	}, {
-		nodeType: "gx_layer",
-		layer: "Administrative Boundaries",
-		isLeaf: false,
-		expanded: false,
-		loader: {
-			param: "LAYERS"
-		}
-	}, {
-		nodeType: "gx_layer",
-		layer: "Employment",
-		isLeaf: false,
-		expanded: false,
-		loader: {
-			param: "LAYERS"
-		}
-	}, {
-		nodeType: "gx_layer",
-		layer: "Transportation",
-		isLeaf: false,
-		expanded: false,
 		loader: {
 			param: "LAYERS"
 		}
@@ -239,9 +218,23 @@ Ext.onReady(function() {
 				activeTab: 0,
 				items: [legend,
 				{
+					title: 'Transportation',
+					xtype: "gx_opacityslider",
+					layer: network,
+					aggressive: true,
+					vertical: true,
+					height: 150,
+				}, {
 					title: 'Placetypes',
 					xtype: "gx_opacityslider",
 					layer: placetypes,
+					aggressive: true,
+					vertical: true,
+					height: 150
+				}, {
+					title: 'Policy Boundaries',
+					xtype: "gx_opacityslider",
+					layer: boundaries,
 					aggressive: true,
 					vertical: true,
 					height: 150
@@ -252,20 +245,6 @@ Ext.onReady(function() {
 					aggressive: true,
 					vertical: true,
 					height: 150
-				}, {
-					title: 'Employment',
-					xtype: "gx_opacityslider",
-					layer: employment,
-					aggressive: true,
-					vertical: true,
-					height: 150
-				}, {
-					title: 'Network',
-					xtype: "gx_opacityslider",
-					layer: network,
-					aggressive: true,
-					vertical: true,
-					height: 150,
 				}, {
 					title: 'Land Use',
 					xtype: "gx_opacityslider",
