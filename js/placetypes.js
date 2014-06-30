@@ -16,7 +16,7 @@ var network = new OpenLayers.Layer.WMS("Transportation", urlCloud, {
 	visibility: false
 });
 var placetypes = new OpenLayers.Layer.WMS("Placetypes", urlCloud, {
-	layers: ["TCquintile","UCquintile", "TCthreshold","UCthreshold", "UrbanTown"],
+	layers: ["TCquintile","UCquintile", "TCthreshold","UCthreshold", "UrbanTownCenters"],
 	transparent: true,
 	'sphericalMercator': true,
 	format: "image/png"
